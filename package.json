@@ -18,9 +18,14 @@
   },
   "homepage": "https://github.com/mgmarti/liri-node-app#readme",
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
     "node-spotify-api": "^1.1.1",
     "ticketmaster": "^2.0.4"
+=======
+    "dotenv": "^7.0.0",
+    "node-spotify-api": "^1.1.1"
+>>>>>>> 041b87e... starter files
   }
 }
