@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // console.log('this is loaded');
 =======
 console.log('this is loaded');
 >>>>>>> 041b87e... starter files
+=======
+// console.log('this is loaded');
+>>>>>>> c56b55c... Spotify API added
 
 exports.spotify = {
   id: process.env.SPOTIFY_ID,
