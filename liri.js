@@ -1,13 +1,12 @@
-require("dotenv").config();
-
 // =======================
 //REQUIRED DEPENDENCIES
 // =======================
 var Spotify = require("node-spotify-api")
 var fs = require("fs")
-var command = process.argv[2]
+var command = process.argv[2];
 
 require("dotenv").config();
+
 
 // =======================
 //KEYS
@@ -19,7 +18,7 @@ const spotify = new Spotify(keys.spotify);
 // LIRI COMMANDS
 // =======================
 
-function startApp (command, input) {
+function startApp(command) {
     switch (command) {
         case "search-songs":
             spotifyThis();
@@ -28,7 +27,7 @@ function startApp (command, input) {
             readFile();
             break;
         default:
-            console.log("here");
+            // console.log("here");
 
 
     }
@@ -42,21 +41,32 @@ function startApp (command, input) {
 
 
 function spotifyThis() {
-    spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-        if (err) {
-          return console.log('Error occurred: ' + err);
-        }
-    
-        var song = data.tracks.items;
-      console.log("SONG NAME: " + song[0].name); 
-      console.log("URL: " + song[0].href)
-      console.log("ALBUM: " + song[0].album.name)
-      });
-}
+    // console.log("I work!");
 
-function readFile () {
-    fs.readFile("random.txt", "utf8", function(error, data) {
-        if(error) {
+    var songName = process.argv[3];
+    // console.log(songName);
+
+    spotify.search({
+        type: 'track',
+        query: songName
+    }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        var songInfo = data.tracks.items;
+        // console.log(songInfo)
+        console.log("ARTIST(S): " + songInfo[0].artists[0].name); 
+        console.log("SONG NAME: " + songInfo[0].name);
+        console.log("ALBUM: " + songInfo[0].album.name)
+        console.log("URL: " + songInfo[0].href)
+    });
+}
+spotifyThis()
+
+function readFile() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        if (error) {
             return error
         }
         console.log(data)
