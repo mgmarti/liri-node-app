@@ -20,8 +20,9 @@ const spotify = new Spotify(keys.spotify);
 
 
 //---- API KEYS ----
-const ticketmaster = (keys.ticketmaster);
-const omdb = (keys.omdb);
+let ticketmaster = (keys.ticketmaster);
+console.log(ticketmaster);
+let omdb = (keys.omdb);
 
 
 //---- USER COMMAND AND INPUT ----
