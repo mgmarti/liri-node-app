@@ -21,7 +21,7 @@ const spotify = new Spotify(keys.spotify);
 
 //---- API KEYS ----
 let ticketmaster = (keys.ticketmaster);
-console.log(ticketmaster);
+// console.log(ticketmaster);
 let omdb = (keys.omdb);
 
 
@@ -111,8 +111,7 @@ function searchConcerts() {
     const concert = process.argv[3];
     // console.log(concert)
 
-    axios.get("https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + concert + "apikey=" + ticketmaster)
-
+    axios.get("https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=" + ticketmaster.id + "&keyword=" + concert)    
         .then(function (response) {
             const concertInfo = response.data._embedded.events;
             console.log(concertInfo[0].name);
