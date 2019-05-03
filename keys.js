@@ -9,3 +9,6 @@ exports.ticketmaster = {
   id: process.env.TICKETMASTER_ID,
   secret: process.env.TICKETMASTER_SECRET
 };
+exports.omdb = {
+  id: process.env.OMDB_ID,
+};

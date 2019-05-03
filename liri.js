@@ -1,31 +1,37 @@
-// =======================
-//REQUIRED DEPENDENCIES
-// =======================
-const Spotify = require("node-spotify-api")
-const ticketmaster = require("ticketmaster")
-const fs = require("fs");
-const axios = require("axios");
-const command = process.argv[2];
-
+//---- REQUIRE .env ----
 require("dotenv").config();
 
-exports.ticketmaster = {
-    id: process.env.TICKETMASTER_ID,
-    secret: process.env.TICKETMASTER_SECRET
-};
 
-// =======================
-//KEYS
-// =======================
+//---- REQUIRE keys.js ----
 const keys = require("./keys.js");
+
+
+//---- REQUIRE fs ----
+const fs = require("fs");
+
+
+//---- REQUIRE AXIOS ----
+const axios = require("axios");
+
+
+//---- INITIALIZE SPOTIFY ----
+const Spotify = require("node-spotify-api")
 const spotify = new Spotify(keys.spotify);
 
 
-// =======================
-// LIRI COMMANDS
-// =======================
+//---- API KEYS ----
+let ticketmaster = (keys.ticketmaster);
+console.log(ticketmaster);
+let omdb = (keys.omdb);
 
-function startApp(command) {
+
+//---- USER COMMAND AND INPUT ----
+const command = process.argv[2];
+const userInput = process.argv[3];
+
+
+//---- LIRI COMMANDS ----
+function startApp(command, userInput) {
     switch (command) {
         case "search-songs":
             spotifyThis();
@@ -40,19 +46,16 @@ function startApp(command) {
             readFile();
             break;
         default:
-            // console.log("here");
-
-
+            console.log("Try Again");
     }
 }
 
-// spotifyThis();
-
-// =======================
-//FUNCTIONS
-// =======================
+startApp(command, userInput);
 
 
+//---- FUNCTIONS ----
+
+//SPOTIFY
 function spotifyThis() {
     // console.log("I work!");
 
@@ -67,7 +70,7 @@ function spotifyThis() {
             return console.log('Error occurred: ' + err);
         }
 
-        var songInfo = data.tracks.items;
+        let songInfo = data.tracks.items;
         // console.log(songInfo)
         console.log("ARTIST(S): " + songInfo[0].artists[0].name);
         console.log("SONG NAME: " + songInfo[0].name);
@@ -75,7 +78,6 @@ function spotifyThis() {
         console.log("URL: " + songInfo[0].href)
     });
 }
-// spotifyThis()
 
 
 function readFile() {
@@ -88,35 +90,40 @@ function readFile() {
 }
 
 
-// function searchMovies() {
+//OMDB 
+function searchMovies() {
+    const movie = process.argv[3];
 
-// }
+    axios.get("http://www.omdbapi.com/?y=&apikey=trilogy&t=" + movie)
+        .then(
+            function (response) {
+                console.log(response.data);
+            })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
 
 
-
+//TICKETMASTER
 function searchConcerts() {
     // console.log("Concerts Here!");
-    var concert = process.argv[3];
+    const concert = process.argv[3];
     // console.log(concert)
 
-    axios.get("https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=svk7DZeiQqZAGGOSkRZ9PPAduCLi5I6N&keyword=" + concert)
-    .then(
-        function (response) {
-            // const concertInfo = responseevents.name;
-            console.log(response.data._embedded.events);
-        })
-    .catch(function (error) {
-            console.log(error);
-          });
+    axios.get("https://app.ticketmaster.com/discovery/v2/events.json?keyword=" + concert + "apikey=" + ticketmaster)
     
+        .then(function (response) {
+            const concertInfo = response.data._embedded.events;
+            console.log(concertInfo[0].name);
+            console.log(concertInfo[0]._embedded.venues[0].name);
+            // console.log(response.data._embedded.events);
+            // console.log("VENUE: ");
+            // console.log("VENUE LOCATION: ");
+            // console.log("DATE: ");
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
 }
-searchConcerts();
-
-
-// ticketmaster(process.env.TICKETMASTER_ID).discovery.v2.event.all()
-//     .then(function (result) {
-//         console.log(result);
-//     });
-
-
-startApp(command);
