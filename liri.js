@@ -101,17 +101,42 @@ function searchMovies() {
         .then(
             function (response) {
                 // console.log(response.data);
-
-                const movieInfo = response.data;
-                // console.log("Title: " + movieInfo.Title);
-                console.log(`TITLE: ${movieInfo.Title}`);
-                console.log(`RELEASE YEAR: ${movieInfo.Year}`);
-                console.log(`ACTORS: ${movieInfo.Actors}`);
-                console.log(`PLOT: ${movieInfo.Plot}`);
-                console.log(`LANGUAGE: ${movieInfo.Language}`);
-                console.log(`PRODUCED IN: ${movieInfo.Country}`);
-                console.log(`IMDB RATING: ${movieInfo.imdbRating}`);
-                console.log(`ROTTEN TOMATOES: ${movieInfo.Ratings[1].Value}`);
+                if (!userInput) {
+                    // console.log("testing testing")
+                    axios.get("http://www.omdbapi.com/?t=inception&apikey=" + omdb.id)
+                        .then(
+                            function (response) {
+                                // console.log(response.data);
+                                if (!userInput) {
+                                    // console.log("this is a movie")
+                                    console.log("\nNo movie input given.\nHere is some info about my favorite movie (:\n")
+                                    const movieInfo = response.data;
+                                    // console.log("Title: " + movieInfo.Title);
+                                    console.log(`TITLE: ${movieInfo.Title}`);
+                                    console.log(`RELEASE YEAR: ${movieInfo.Year}`);
+                                    console.log(`ACTORS: ${movieInfo.Actors}`);
+                                    console.log(`PLOT: ${movieInfo.Plot}`);
+                                    console.log(`LANGUAGE: ${movieInfo.Language}`);
+                                    console.log(`PRODUCED IN: ${movieInfo.Country}`);
+                                    console.log(`IMDB RATING: ${movieInfo.imdbRating}`);
+                                    console.log(`ROTTEN TOMATOES: ${movieInfo.Ratings[1].Value}`);
+                                }
+                            })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                } else {
+                    const movieInfo = response.data;
+                    // console.log("Title: " + movieInfo.Title);
+                    console.log(`TITLE: ${movieInfo.Title}`);
+                    console.log(`RELEASE YEAR: ${movieInfo.Year}`);
+                    console.log(`ACTORS: ${movieInfo.Actors}`);
+                    console.log(`PLOT: ${movieInfo.Plot}`);
+                    console.log(`LANGUAGE: ${movieInfo.Language}`);
+                    console.log(`PRODUCED IN: ${movieInfo.Country}`);
+                    console.log(`IMDB RATING: ${movieInfo.imdbRating}`);
+                    console.log(`ROTTEN TOMATOES: ${movieInfo.Ratings[1].Value}`);
+                }
             })
         .catch(function (error) {
             console.log(error);
