@@ -28,6 +28,21 @@ Assignment to create LIRI, a Language Interpretation and Recognition Interface. 
 ### Functionality
 ---
 1. search-songs
-     Function takes the command and the userInput(artist), and returns the next concert time and date for that artist, as well as location and city.
-     ![image of movieThis](/images/search-songs.gif)
+    
+    Function takes the command(search-songsclear) and the userInput(artist), and returns the next concert time and date for that artist, as well as location and city.
+     
+     ![image of search-songs](/images/search-songs.gif)
+
+2. search-movies
+    
+    Function takes the command(search-movies) and the userInput(movie name), and returns title, cast, release date, ratings, country of origin, original language and plot.
+     
+     ![image of search-movies](/images/search-movies.gif)
+
+3. search-concerts
+    
+    Function takes the command(search-movies) and the userInput(artist), and returns the next concert time and date for that artist, as well as location and city.
+     
+     ![image of search-concerts](/images/search-concerts.gif)
+
 
