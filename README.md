@@ -6,14 +6,15 @@ Assignment to create LIRI, a Language Interpretation and Recognition Interface. 
 ### Requirements
 ---
 **APIs:** Spotify, Ticketmaster, OMDB
+
 **Node Packages:** 
 1. **Dotenv:** 
     *Command Line: 'npm install dotenv'*
 
-2. **Moment**
+2. **Moment:**
     *Command Line: 'npm install moment'*
 
-3. **AXIOS**
+3. **AXIOS:**
     *Command Line: 'npm install axios'*
 
 ### Commands
@@ -28,5 +29,5 @@ Assignment to create LIRI, a Language Interpretation and Recognition Interface. 
 ---
 1. search-songs
      Function takes the command and the userInput(artist), and returns the next concert time and date for that artist, as well as location and city.
-     ![image of movieThis](/images/search-songs.png)
+     ![image of movieThis](/images/search-songs.gif)
 
