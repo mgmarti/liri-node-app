@@ -23,9 +23,9 @@ const spotify = new Spotify(keys.spotify);
 
 
 //---- API KEYS ----
-let ticketmaster = (keys.ticketmaster);
+const ticketmaster = (keys.ticketmaster);
 // console.log(ticketmaster);
-let omdb = (keys.omdb);
+const omdb = (keys.omdb);
 
 
 //---- USER COMMAND AND INPUT ----
@@ -97,10 +97,21 @@ function readFile() {
 function searchMovies() {
     const movie = process.argv[3];
 
-    axios.get("http://www.omdbapi.com/?y=&apikey=trilogy&t=" + movie)
+    axios.get("http://www.omdbapi.com/?t=" + movie + "&apikey=" + omdb.id)
         .then(
             function (response) {
-                console.log(response.data);
+                // console.log(response.data);
+
+                const movieInfo = response.data;
+                // console.log("Title: " + movieInfo.Title);
+                console.log(`TITLE: ${movieInfo.Title}`);
+                console.log(`RELEASE YEAR: ${movieInfo.Year}`);
+                console.log(`ACTORS: ${movieInfo.Actors}`);
+                console.log(`PLOT: ${movieInfo.Plot}`);
+                console.log(`LANGUAGE: ${movieInfo.Language}`);
+                console.log(`PRODUCED IN: ${movieInfo.Country}`);
+                console.log(`IMDB RATING: ${movieInfo.imdbRating}`);
+                console.log(`ROTTEN TOMATOES: ${movieInfo.Ratings[1].Value}`);
             })
         .catch(function (error) {
             console.log(error);
@@ -123,10 +134,15 @@ function searchConcerts() {
             // console.log(date)
             // console.log(response.data._embedded.events);
 
-            console.log("ARTIST: " + concertInfo[0].name);
-            console.log("DATE: " + date);
-            console.log("VENUE: " + concertInfo[0]._embedded.venues[0].name);
-            console.log("VENUE LOCATION: " + concertInfo[0]._embedded.venues[0].address.line1 + " " + concertInfo[0]._embedded.venues[0].city.name + ", " + concertInfo[0]._embedded.venues[0].state.stateCode + " " + concertInfo[0]._embedded.venues[0].postalCode);
+            if (!userInput) {
+                console.log("Please input name of event to continue.\nTry typing search-concerts 'event/artist name'")
+            } else {
+
+                console.log("ARTIST: " + concertInfo[0].name);
+                console.log("DATE: " + date);
+                console.log("VENUE: " + concertInfo[0]._embedded.venues[0].name);
+                console.log("VENUE LOCATION: " + concertInfo[0]._embedded.venues[0].address.line1 + " " + concertInfo[0]._embedded.venues[0].city.name + ", " + concertInfo[0]._embedded.venues[0].state.stateCode + " " + concertInfo[0]._embedded.venues[0].postalCode);
+            }
         })
         .catch(function (error) {
             console.log(error);
