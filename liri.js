@@ -49,11 +49,12 @@ function startApp(command, userInput) {
             readFile();
             break;
         default:
-            // console.log("\nHi, I'm LIRI. \n\nI can help you find songs, concerts, and movies by typing following commands: \n\nFOR SONG INFO: search-songs 'song name' \nFOR CONCERT INFO: search-concerts 'artist name' \nFOR MOVIE INFO: search-movies 'movie name' \n\nSee what I can do! Type: search-songs 'on a good day'");
+            console.log("\nHi, I'm LIRI. \n\nI can help you find songs, concerts, and movies if you type one of the following commands: \n\nFOR SONG INFO: search-songs 'song name' \nFOR CONCERT INFO: search-concerts 'artist name' \nFOR MOVIE INFO: search-movies 'movie name' \n\nSee what I can do! Type: search-songs 'on a good day'");
     }
 }
 
 startApp(command, userInput);
+
 
 
 //---- FUNCTIONS ----
@@ -81,7 +82,6 @@ function spotifyThis() {
         console.log("URL: " + songInfo[0].href)
     });
 }
-
 
 function readFile() {
     fs.readFile("random.txt", "utf8", function (error, data) {
